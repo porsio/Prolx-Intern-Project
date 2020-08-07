@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1087392898974",
+    "firebase_url": "https://prolx-f59b7.firebaseio.com",
+    "project_id": "prolx-f59b7",
+    "storage_bucket": "prolx-f59b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087392898974:android:98dfc133b70bbbead1008f",
+        "android_client_info": {
+          "package_name": "com.Prolx.www"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087392898974-ml9a4n8840tiuhgc03ciijs2n1k6kgis.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqJ0w28TTsF_A6CW0QZwUZX3haBfnFdps"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087392898974-ml9a4n8840tiuhgc03ciijs2n1k6kgis.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
