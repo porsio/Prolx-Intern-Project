@@ -1,3 +1,4 @@
+import 'package:Prolx/ui/categoryList.dart';
 import 'package:Prolx/ui/navigation.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,12 @@ class RouteGenerator {
       case '/navigation':
         return MaterialPageRoute(
           builder: (_) => Navigation(),
+        );
+      case '/categoryList':
+        return MaterialPageRoute(
+          builder: (_) => CategoryList(
+            cat: args,
+          ),
         );
       // case '/main_screen':
       //   return MaterialPageRoute(
