@@ -1,6 +1,8 @@
+import 'package:Prolx/functionalities/firestoreServices.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key key}) : super(key: key);
@@ -8,53 +10,98 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: <Widget>[
-          Flexible(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    """Featured:""",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 0.0),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  """Featured:""",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Flexible(
-            flex: 4,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: featured_product_images(),
-            ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: featured_product_images(),
           ),
-          Flexible(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 8.0),
-              child: Row(
-                children: <Widget>[
-                  Text(
-                    """Categories:""",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 8.0),
+            child: Row(
+              children: <Widget>[
+                Text(
+                  """Categories:""",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          Flexible(
-            flex: 5,
-            child: categories(),
+          StreamBuilder(
+            stream: FirestoreService().getCategories(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (!snapshot.hasData) {
+                return SpinKitCircle(
+                  color: Colors.redAccent,
+                );
+              }
+              return Center(
+                child: Wrap(
+                  children: List<Widget>.generate(
+                      snapshot.data.documents.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed('/categoryList',
+                              arguments:
+                                  snapshot.data.documents[index].documentID);
+                        },
+                        child: Container(
+                          height: MediaQuery.of(context).size.width * .43,
+                          width: MediaQuery.of(context).size.width * .3,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              CircleAvatar(
+                                radius: MediaQuery.of(context).size.width * .13,
+                                backgroundColor: Colors.amber,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  snapshot.data.documents[index].documentID
+                                          .toString()
+                                          .substring(0, 1)
+                                          .toUpperCase() +
+                                      snapshot.data.documents[index].documentID
+                                          .toString()
+                                          .substring(1),
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                  textAlign: TextAlign.center,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              );
+            },
           ),
+          // Flexible(
+          //   flex: 5,
+          //   child: categories(),
+          // ),
         ],
       ),
     );
@@ -101,7 +148,7 @@ class _featured_product_imagesState extends State<featured_product_images> {
             onDismissed: (DismissDirection direction) {
               setState(() {
                 presentImageNumber +=
-                direction == DismissDirection.endToStart ? 1 : -1;
+                    direction == DismissDirection.endToStart ? 1 : -1;
                 if (presentImageNumber > 8)
                   presentImageNumber = 1;
                 else if (presentImageNumber < 1) presentImageNumber = 8;
