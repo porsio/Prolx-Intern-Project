@@ -126,16 +126,17 @@ class _featured_product_imagesState extends State<featured_product_images> {
     return StreamBuilder(
       stream: FirestoreService().getFeaturedProducts(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        snapshot.data.documents.forEach((product) {
-          featuredImages.add(
-            product.data["productImageURL"],
-          );
-        });
         if (!snapshot.hasData) {
           return SpinKitCircle(
             color: Colors.redAccent,
           );
         }
+        snapshot.data.documents.forEach((product) {
+          featuredImages.add(
+            product.data["productImageURL"],
+          );
+        });
+
         numImages = snapshot.data.documents.length;
         bullets = [];
         for (var i = 1; i <= numImages; i++)

@@ -48,7 +48,7 @@ class FirestoreService {
   }
 
   Stream<QuerySnapshot> getFeaturedProducts() {
-    return db
+    return _db
         .collection('products')
         .where("isFeatured", isEqualTo: true)
         .snapshots();
