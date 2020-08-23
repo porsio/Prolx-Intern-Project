@@ -1,11 +1,31 @@
+import 'package:Prolx/ui/SignUpEmail.dart';
 import 'package:Prolx/ui/categoryList.dart';
+import 'package:Prolx/ui/loginEmail.dart';
+import 'package:Prolx/ui/mainScreen.dart';
 import 'package:Prolx/ui/navigation.dart';
+import 'package:Prolx/ui/registration.dart';
 import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     var args = settings.arguments;
     switch (settings.name) {
+      case '/':
+        return MaterialPageRoute(
+          builder: (_) => MainScreen(),
+        );
+      case '/login_email':
+        return MaterialPageRoute(
+          builder: (_) => LoginEmail(),
+        );
+      case '/signUp_email':
+        return MaterialPageRoute(
+          builder: (_) => SignUP(),
+        );
+      case '/registration':
+        return MaterialPageRoute(
+          builder: (_) => Registration(),
+        );
       case '/navigation':
         return MaterialPageRoute(
           builder: (_) => Navigation(),
@@ -16,10 +36,6 @@ class RouteGenerator {
             cat: args,
           ),
         );
-      // case '/main_screen':
-      //   return MaterialPageRoute(
-      //     builder: (_) => MainScreen(),
-      //   );
       // case '/description':
       //   return MaterialPageRoute(
       //     builder: (_) => Description(productId: args),

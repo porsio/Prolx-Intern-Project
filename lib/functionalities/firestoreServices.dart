@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'localData.dart';
 
 class FirestoreService {
   static final FirestoreService _firestoreService =
       FirestoreService._internal();
-  Firestore db = Firestore.instance;
+  Firestore _db = Firestore.instance;
 
   FirestoreService._internal();
 
@@ -12,6 +15,35 @@ class FirestoreService {
   }
 
   Stream<QuerySnapshot> getCategories() {
-    return db.collection('categories').orderBy('index').snapshots();
+    return _db.collection('categories').orderBy('index').snapshots();
+  }
+
+  Future<bool> checkRegistered() async {
+    try {
+      var uid = await LocalData().getUid();
+      var doc = await _db.collection('users').document(uid).get();
+      return doc['registered'];
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<void> updateUser(String name, String mobileNo) async {
+    var uid = await LocalData().getUid();
+    await _db.collection('users').document(uid).setData({
+      'mobileNo': mobileNo,
+      'name': name,
+      'registered': true,
+      'access': 'issuer',
+    }, merge: true);
+  }
+
+  Future<void> createUser(FirebaseUser user) async {
+    await _db.collection('users').document(user.uid).setData({
+      'uid': user.uid,
+      'email': user.email,
+      'since': DateTime.now(),
+      'registered': false,
+    }, merge: true);
   }
 }

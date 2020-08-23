@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "Prolx",
       debugShowCheckedModeBanner: false,
-      initialRoute: '/navigation',
+      initialRoute: '/',
       theme: ThemeData(primarySwatch: Colors.red),
       onGenerateRoute: RouteGenerator.generateRoute,
     );
