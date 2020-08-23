@@ -14,4 +14,11 @@ class FirestoreService {
   Stream<QuerySnapshot> getCategories() {
     return db.collection('categories').orderBy('index').snapshots();
   }
+
+  Stream<QuerySnapshot> getFeaturedProducts() {
+    return db
+        .collection('products')
+        .where("isFeatured", isEqualTo: true)
+        .snapshots();
+  }
 }
