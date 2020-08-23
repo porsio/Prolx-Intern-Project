@@ -46,4 +46,11 @@ class FirestoreService {
       'registered': false,
     }, merge: true);
   }
+
+  Stream<QuerySnapshot> getFeaturedProducts() {
+    return db
+        .collection('products')
+        .where("isFeatured", isEqualTo: true)
+        .snapshots();
+  }
 }
