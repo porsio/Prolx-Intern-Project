@@ -3,6 +3,7 @@ import 'package:Prolx/ui/categoryList.dart';
 import 'package:Prolx/ui/loginEmail.dart';
 import 'package:Prolx/ui/mainScreen.dart';
 import 'package:Prolx/ui/navigation.dart';
+import 'package:Prolx/ui/productPage.dart';
 import 'package:Prolx/ui/registration.dart';
 import 'package:flutter/material.dart';
 
