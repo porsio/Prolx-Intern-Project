@@ -1,4 +1,5 @@
 import 'package:Prolx/ui/SignUpEmail.dart';
+import 'package:Prolx/ui/homePage.dart';
 import 'package:Prolx/ui/categoryList.dart';
 import 'package:Prolx/ui/loginEmail.dart';
 import 'package:Prolx/ui/mainScreen.dart';
@@ -6,6 +7,7 @@ import 'package:Prolx/ui/navigation.dart';
 import 'package:Prolx/ui/productPage.dart';
 import 'package:Prolx/ui/registration.dart';
 import 'package:flutter/material.dart';
+import 'package:Prolx/ui/productDisplayDetails.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -35,6 +37,12 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => CategoryList(
             cat: args,
+          ),
+        );
+      case '/productDisplayDetails':
+        return MaterialPageRoute(
+          builder: (_) => DisplayProductDetails(
+            product: args,
           ),
         );
       // case '/description':

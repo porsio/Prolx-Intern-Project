@@ -162,9 +162,9 @@ class _featured_product_imagesState extends State<featured_product_images> {
             children: <Widget>[
               InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed('/product',
-                      arguments: snapshot
-                          .data.documents[presentImageNumber - 1].documentID);
+                  Navigator.of(context).pushNamed('/productDisplayDetails',
+                      arguments:
+                          snapshot.data.documents[presentImageNumber - 1]);
                 },
                 child: Dismissible(
                   resizeDuration: null,

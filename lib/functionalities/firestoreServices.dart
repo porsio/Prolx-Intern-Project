@@ -53,4 +53,11 @@ class FirestoreService {
         .where("isFeatured", isEqualTo: true)
         .snapshots();
   }
+
+  Stream<QuerySnapshot> getCategoryProducts(String cat) {
+    return _db
+        .collection('products')
+        .where("category", isEqualTo: cat)
+        .snapshots();
+  }
 }
